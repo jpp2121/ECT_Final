@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>360 Tours</title>
+  <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+  <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
+  <script src="https://supereggbert.github.io/aframe-htmlembed-component/dist/build.js"></script>
+</head>
+<style>
+  #nav {
+    position: fixed;
+    left: 0px;
+    height: 43px;
+    bottom: 2px;
+    background-color: #6e282800;
+    box-shadow: 0 0 0 3px #00000000;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    z-index: 1;
+    overflow-x: auto;
+
+  }
+  #nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  #nav ul li {
+    margin: 0px 5px;
+    padding: 0;
+    float: left;
+    border: #000000 3px solid;
+    border-radius: 5px;
+    color: rgb(0, 0, 0);
+    text-align: center;
+
+  }
+  #nav ul li a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    overflow: hidden;
+    white-space: nowrap;
+    text-decoration: none;
+    padding: 5px 10px;
+    display: block;
+    color: rgb(0, 0, 0);
+    text-align: center;
+  }
+  button {
+    display: none;
+  }
+  .back{
+    position : absolute;
+    top : 20px;
+    width: 80px;
+    height: 43px;
+    color: #000000;
+    z-index: 1;
+    border-radius: 5px;
+    border: #000000 3px solid;
+    padding-top: 20px;
+    padding-left: 20px;
+  }
+</style>
+<body>
+  <script>
+    // script that changes sky images 
+    AFRAME.registerComponent('set-skytest', {
+      schema: { default: '' },
+      init() {
+        const sky = document.querySelector('a-sky');
+        this.el.addEventListener('click', () => {
+          sky.setAttribute('src', this.data);
+        });
+      }
+    });
+  </script>
+  <a-scene>
+    <a href="index.html"><div class="back">Go Back</div></a>
+    <div id="nav">
+      <ul>
+        <a-entity set-skytest="kitchen.jpg" class="clickable">
+          <li><a href="#" onclick="clicked" class="home">Kitchen</a></li>
+        </a-entity>
+        <a-entity set-skytest="bathroom.jpg">
+          <li><a href="#" class="about">Bathroom</a></li>
+        </a-entity>
+        <a-entity set-skytest="porch.jpg">
+          <li><a href="#" class="blah">Porch</a></li>
+        </a-entity>
+        <a-entity set-skytest="bedroom.jpg">
+          <li><a href="#">Bedroom</a></li>
+        </a-entity>
+      </ul>
+    </div>
+    <a-sky></a-sky>
+  </a-scene>
+</body>
+</html>
